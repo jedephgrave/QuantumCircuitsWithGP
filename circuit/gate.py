@@ -4,13 +4,16 @@ class Gate:
         self.arity = arity
         self.param_num = param_num
         
+        self._wires = None
+        self._param = None
+        
     @property
     def wires(self) -> list[int]:
         return self._wires
         
     @wires.setter
     def wires(self, wires: list[int]):
-        if len(wires) == self.arity:
+        if len(wires) != self.arity:
             raise ValueError(f"{self.arity} wires expected, {len(wires)} given.")
         
         self._wires = wires
@@ -24,25 +27,8 @@ class Gate:
         if len(param) != self.param_num:
             raise ValueError(f"{self.param_num} parameters expected, {len(param)} given")
             
-        self.param = param
+        self._param = param
         
-
-    
-    
+    def __str__(self):
+        return f"({self.name}, {self.wires}, {self.param})"
         
-        
-        
-        
-# NOTE
-# hadamard - only one wire possible (pure hadamard)
-# cnot - must have twoc
-# this idea needs to be enforced when altering the wires 
-
-# ensure the length of the wire array is maintained 
-# include class functions like "change wire" or "change param"    
-
-# mutation can happen within the wires - want this to be seperate from any GP work - no random, just take inputs and give outputs 
-# mutation can happen with angle parameters 
-
-
-# we dont want a seperate gate definition for each possible pair of wires - whats a neat way of 

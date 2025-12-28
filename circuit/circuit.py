@@ -1,4 +1,4 @@
-from gate import Gate
+from .gate import Gate
 
 class Circuit:
     
@@ -24,6 +24,12 @@ class Circuit:
         
         return Circuit(combination)
 
+    def __str__(self):
+        circuit_array = []
+        for gate in self.circuit:
+            circuit_array.append(str(gate))
+        
+        return f"{circuit_array}"
 
 
     
