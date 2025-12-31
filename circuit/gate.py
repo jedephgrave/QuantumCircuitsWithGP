@@ -29,6 +29,6 @@ class Gate:
             
         self._param = param
         
-    def __str__(self):
+    def __str__(self) -> str:
         return f"({self.name}, {self.wires}, {self.param})"
         

@@ -2,9 +2,14 @@ from .gate import Gate
 
 class Circuit:
     
-    def __init__(self, circuit: list[Gate]):
+    def __init__(self, circuit: list[Gate], num_wires: int):
         self.circuit = circuit
         self.length = len(circuit)
+        self.num_wires = num_wires
+        
+    def add_gate(self, gate: Gate):
+        self.circuit.append(gate)
+        self.length += 1
         
     def split(self, cutoff: int):
         if not(0 <= cutoff < self.length-1 ):
@@ -24,7 +29,7 @@ class Circuit:
         
         return Circuit(combination)
 
-    def __str__(self):
+    def __str__(self) -> str:
         circuit_array = []
         for gate in self.circuit:
             circuit_array.append(str(gate))
