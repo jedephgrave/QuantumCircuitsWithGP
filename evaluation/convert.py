@@ -10,7 +10,6 @@ class QiskitBuilder:
         self.gates = {
             "H": self.hadamard,
             "CN": self.cnot,
-            
         }
         
     # class methods:

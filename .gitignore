@@ -1,3 +1,7 @@
 # Virtual env
 .venv/
 
+# Pycache directories and .pyc files
+**/__pycache__
+**/*.pyc
+

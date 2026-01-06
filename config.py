@@ -13,5 +13,15 @@ INITIAL_SOLUTION_SIZE = 3
 
 # evaluation variables go here (ideal circuit outputs, times evaluated)
 
+NUM_EVALUATIONS = 100
+
+IDEAL_RESULTS = {
+    '00': NUM_EVALUATIONS/2,
+    '01': 0,
+    '10': 0,
+    '11': NUM_EVALUATIONS/2
+}
+
+
 
 
