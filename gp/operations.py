@@ -1,1 +1,2 @@
-# crossover and mutation functions needed
+# crossover (selection too) and mutation functions needed
+
