@@ -5,7 +5,7 @@ import random
 
 class Population:
 
-    def __init__(self, members: list[Circuit]):
+    def __init__(self, members: list[Circuit] = []):
         self.members = members
         self.size = len(members)
         self.fitnesses = []
@@ -46,11 +46,36 @@ class Population:
             return ValueError(f"Number between 1 and {self.size} expected, number less than or greater than population size given.")
         
         return random.sample(self.members, number)
+    
+    def sample_population(self, size) -> "Population":
+        if size > self.size or self.size <= 0:
+            return ValueError(f"Number between 1 and {self.size} expected, number less than or greater than population size given.")
+        
+        if len(self.fitnesses) == 0:
+            return ValueError(f"Population has no fitnesses attributed to it")
+
+        pop_indexes = random.sample(list(range(0, self.size)), size)
+        
+        sample_pop = Population()
+        sample_fitnesses = []
+        
+        for index in pop_indexes:
+            sample_pop.add_member(self.member(index))
+            sample_fitnesses.append(self.fitnesses[index])
+            
+        sample_pop.fitnesses = sample_fitnesses
+        
+        return sample_pop
         
     # return formatted string of circuit strings and their respective fitnesses    
     def __str__(self) -> str:
         population_array = []
-        for circuit in self.members:
-            population_array.append(str(circuit))
+        
+        if len(self.fitnesses) == 0:
+            for circuit in self.members:
+                population_array.append(str(circuit))
+        else:
+            for index in range(self.size):
+                population_array.append(f"{str(self.member(index))} : {self.fitnesses[index]}")
         
         return f"{population_array}"

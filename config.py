@@ -8,7 +8,7 @@ GATE_SET = [
 NUM_WIRES = 2
 
 # gp hyperparameters go here 
-POPULATION_SIZE = 5
+POPULATION_SIZE = 20
 INITIAL_SOLUTION_SIZE = 3
 
 # evaluation variables go here (ideal circuit outputs, times evaluated)
@@ -22,6 +22,9 @@ IDEAL_RESULTS = {
     '11': NUM_EVALUATIONS/2
 }
 
+# gp variables
+
+TOURNAMENT_SIZE = 2 
 
 
 

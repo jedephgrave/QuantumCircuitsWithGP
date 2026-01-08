@@ -21,6 +21,7 @@ class QiskitBuilder:
     def build(self):
         for gate in self.circuit.circuit:
             self.gates[gate.name](gate.wires)
+        
         return self.qc
         
     def hadamard(self, wires: list[int]):
