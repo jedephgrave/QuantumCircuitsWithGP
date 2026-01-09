@@ -12,7 +12,7 @@ def selection(population: Population):
     best_fitness = math.inf
     best_circuit = None
     
-    for index in TOURNAMENT_SIZE:
+    for index in range(TOURNAMENT_SIZE):
         member_fitness = sample.fitnesses[index]
         member_circuit = sample.member(index)
         

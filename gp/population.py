@@ -5,7 +5,7 @@ import random
 
 class Population:
 
-    def __init__(self, members: list[Circuit] = []):
+    def __init__(self, members: list[Circuit]):
         self.members = members
         self.size = len(members)
         self.fitnesses = []
@@ -23,7 +23,7 @@ class Population:
     
     @fitnesses.setter
     def fitnesses(self, fitnesses: list[int]):
-        if len(fitnesses) != self.size:
+        if fitnesses and len(fitnesses) != self.size:
             raise ValueError(f"List of size {self.size} expected, size of {len(fitnesses)} given.")
         
         self._fitnesses = fitnesses
@@ -47,16 +47,16 @@ class Population:
         
         return random.sample(self.members, number)
     
-    def sample_population(self, size) -> "Population":
-        if size > self.size or self.size <= 0:
+    def sample_population(self, sample_size) -> "Population":
+        if sample_size > self.size or sample_size <= 0:
             return ValueError(f"Number between 1 and {self.size} expected, number less than or greater than population size given.")
         
         if len(self.fitnesses) == 0:
             return ValueError(f"Population has no fitnesses attributed to it")
 
-        pop_indexes = random.sample(list(range(0, self.size)), size)
+        pop_indexes = random.sample(list(range(0, self.size)), sample_size)
         
-        sample_pop = Population()
+        sample_pop = Population([])
         sample_fitnesses = []
         
         for index in pop_indexes:
