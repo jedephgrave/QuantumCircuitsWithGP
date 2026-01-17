@@ -10,6 +10,7 @@ class QiskitBuilder:
         self.gates = {
             "H": self.hadamard,
             "CN": self.cnot,
+            "X": self.paulix,
         }
         
     # class methods:
@@ -30,6 +31,8 @@ class QiskitBuilder:
     def cnot(self, wires: list[int]):
         self.qc.cx(wires[0], wires[1])
 
+    def paulix(self, wires: list[int]):
+        self.qc.x(wires[0])
 
 # call fitness on whole population - 
 # take in a given circuit

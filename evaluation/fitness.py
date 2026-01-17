@@ -44,3 +44,5 @@ class CircuitFitness:
     def makefitness(self):
         for qc in self.qiskitcircuits:
             self.fitnesses.append(self.evaluatecircuit(qc))
+            
+        # automatically add fitness to the population after this?

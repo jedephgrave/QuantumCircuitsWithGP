@@ -1,20 +1,14 @@
 from gp import initialisation
 from evaluation import CircuitFitness
+from gp import operations
 
-p = initialisation.init_population()
+from circuit import Circuit, Gate
 
-print(p)
+from gp import gp, Population
 
-cf = CircuitFitness(p)
+def main():
+    p = gp.evolution()
+    print(p)
 
-cf.makeqiskitcircuits()
-cf.makefitness()
-
-
-p.fitnesses = cf.fitnesses
-
-print(p)
-
-print("\n\n\nYOO\n\n\n")
-
-print(p.sample_population(4))
+if __name__ == "__main__":
+    main()

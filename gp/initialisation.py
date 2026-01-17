@@ -20,10 +20,8 @@ def create_random_gate():
     return gate
     
 def create_random_circuit() -> Circuit:
-    # pick a random number of gates (1 to initial solution size)
-    # loop the random number of times - randomly select gate from gate set - add to array
-    # after built - create circuit object and return
-    num_gates = random.randint(1, INITIAL_SOLUTION_SIZE)
+    # call create random gates and add to circuit
+    num_gates = random.randint(2, INITIAL_SOLUTION_SIZE)
     print(num_gates)
     c = Circuit([], NUM_WIRES) # initiliase circuit as empty
     
@@ -35,9 +33,7 @@ def create_random_circuit() -> Circuit:
     
     
 def init_population() -> Population:
-    # create random circuits
-    # create circuits until population size 
-    # add each to array - then create population object 
+    # call create random circuits and add them to population
     p = Population([])
     for _ in range(POPULATION_SIZE):
         p.add_member(create_random_circuit())

@@ -5,6 +5,11 @@ GATE_SET = [
     Gate('CN', 2, 0),
 ]
 
+# dont use this - just to list extra gates not currently being used
+SPARE_GATE_SET = [
+    Gate('X', 1, 0),
+]
+
 NUM_WIRES = 2
 
 # gp hyperparameters go here 
@@ -23,6 +28,8 @@ IDEAL_RESULTS = {
 }
 
 # gp variables
+
+NUM_GENERATIONS = 10
 
 TOURNAMENT_SIZE = 2 
 

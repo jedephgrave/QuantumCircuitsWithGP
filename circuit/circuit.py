@@ -11,15 +11,15 @@ class Circuit:
         self.circuit.append(gate)
         self.length += 1
         
-    def split(self, cutoff: int):
+    def split(self, cutoff: int) -> tuple["Circuit"]:
         if not(0 <= cutoff < self.length-1 ):
-            raise ValueError(f"Cutoff between 0 and {self.length - 1} expected ,value of {cutoff} given.")
+            raise ValueError(f"Cutoff between 0 and {self.length - 1} expected, value of {cutoff} given.")
         
         # split circuit into two seperate circuit objects 
         left = self.circuit[:cutoff+1:]
         right = self.circuit[cutoff+1::]
         
-        return Circuit(left), Circuit(right)
+        return Circuit(left, self.num_wires), Circuit(right, self.num_wires)
         
     def combine(self, circuit: "Circuit"):
         left = self.circuit
@@ -27,7 +27,21 @@ class Circuit:
         
         combination = left + right
         
-        return Circuit(combination)
+        return Circuit(combination, self.num_wires)
+    
+    def swap(self, index: int, new_gate: Gate):
+        # takes gate at defined index and swaps for given gate
+        
+        if not(0 <= index < self.length):
+            raise ValueError(f"Index between 0 and {self.length} expected, value of {index} given")
+        
+        left = self.circuit[0:index]
+        right = self.circuit[index+1::]
+        
+        left.append(new_gate)
+        
+        self.circuit = left + right
+        
 
     def __str__(self) -> str:
         circuit_array = []

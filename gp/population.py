@@ -66,6 +66,11 @@ class Population:
         sample_pop.fitnesses = sample_fitnesses
         
         return sample_pop
+    
+    def overwrite_from(self, new_population):
+        self.__dict__.clear()
+        self.__dict__.update(new_population.__dict__)
+        return 
         
     # return formatted string of circuit strings and their respective fitnesses    
     def __str__(self) -> str:
