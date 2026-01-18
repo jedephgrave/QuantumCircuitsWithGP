@@ -9,12 +9,12 @@ class CircuitFitness:
         self.population = population
         
         self.qiskitcircuits = []
-        self.fitness = []
+        self.fitnesses = []
         
     def makeqiskitcircuits(self):
         for circuit in self.population.members:
             qc = QiskitBuilder(circuit)
-            self.qiskitcircuits.append(qc.build)
+            self.qiskitcircuits.append(qc.build())
             
     def evaluatecircuit(self, qc: QuantumCircuit):
         qc.measure_all()
@@ -43,4 +43,6 @@ class CircuitFitness:
             
     def makefitness(self):
         for qc in self.qiskitcircuits:
-            self.fitness.append(self.evaluatecircuit(qc))
+            self.fitnesses.append(self.evaluatecircuit(qc))
+            
+        # automatically add fitness to the population after this?
