@@ -19,6 +19,8 @@ def evolution() -> Population:
         cf.makefitness()
         population.fitnesses = cf.fitnesses
         
+        print(population.fitnesses)
+        
         next_population = Population([])
         
         while next_population.size < population.size:
@@ -44,7 +46,7 @@ def evolution() -> Population:
     cf.makefitness()
     population.fitnesses = cf.fitnesses
     
-    print("FINAL FITNESS: ", population.fitnesses)
+    print("FINAL FITNESSES: ", population.fitnesses)
         
     return population
 

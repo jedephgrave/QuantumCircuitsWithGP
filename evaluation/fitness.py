@@ -22,7 +22,6 @@ class CircuitFitness:
         result = sampler.run([qc], shots=NUM_EVALUATIONS).result()
         
         result_dict = result[0].data.meas.get_counts()
-        print(result_dict)
         
         # evaluate circuit 
         total = 0

@@ -22,7 +22,6 @@ def create_random_gate():
 def create_random_circuit() -> Circuit:
     # call create random gates and add to circuit
     num_gates = random.randint(2, INITIAL_SOLUTION_SIZE)
-    print(num_gates)
     c = Circuit([], NUM_WIRES) # initiliase circuit as empty
     
     for _ in range(num_gates):

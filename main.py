@@ -9,6 +9,7 @@ from gp import gp, Population
 def main():
     p = gp.evolution()
     print(p)
+    
 
 if __name__ == "__main__":
     main()
