@@ -11,6 +11,8 @@ def evolution() -> Population:
     
     # initialisation 
     population = init_population()
+    
+    good = 0
 
     for _ in range(NUM_GENERATIONS):
         #evaluate 
@@ -20,6 +22,10 @@ def evolution() -> Population:
         population.fitnesses = cf.fitnesses
         
         print(population.fitnesses)
+        
+        for fitness in population.fitnesses:
+            if fitness <= 75:
+                good += 1
         
         next_population = Population([])
         
@@ -47,6 +53,7 @@ def evolution() -> Population:
     population.fitnesses = cf.fitnesses
     
     print("FINAL FITNESSES: ", population.fitnesses)
+    print("Number of bell state circuits generated: ", good)
         
     return population
 
