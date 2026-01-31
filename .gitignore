@@ -5,5 +5,8 @@
 **/__pycache__
 **/*.pyc
 
+# Functionality testing
+test_features.py
+
 # Other
 notes.txt
