@@ -2,7 +2,9 @@ from gp import Population
 from config import NUM_EVALUATIONS, IDEAL_RESULTS
 from qiskit import QuantumCircuit
 from qiskit.primitives import StatevectorSampler
+from qiskit.quantum_info import Statevector
 from .convert import QiskitBuilder
+import numpy as np
 
 class CircuitFitness:
     def __init__(self, population: Population):
@@ -10,38 +12,38 @@ class CircuitFitness:
         
         self.qiskitcircuits = []
         self.fitnesses = []
+        self.inputqubits = ['00']
         
     def makeqiskitcircuits(self):
         for circuit in self.population.members:
             qc = QiskitBuilder(circuit)
             self.qiskitcircuits.append(qc.build())
             
-    def evaluatecircuit(self, qc: QuantumCircuit):
-        qc.measure_all()
-        sampler = StatevectorSampler()
-        result = sampler.run([qc], shots=NUM_EVALUATIONS).result()
-        
-        result_dict = result[0].data.meas.get_counts()
-        
-        # evaluate circuit 
+    def evaluatecircuit(self, qc: QuantumCircuit, data: list[list[str], np.array]) -> int:
+
         total = 0
-        length = len(IDEAL_RESULTS)
+        count = 0
         
-        for key in IDEAL_RESULTS:
-            qb_ideal = IDEAL_RESULTS[key]
-            
-            try:
-                qb_actual = result_dict[key]
-            except KeyError:
-                qb_actual = 0
-            
-            total += (qb_ideal - qb_actual)**2
+        data = zip(data[0], data[1])
         
-        return total/length
+        for in_qubits, expected in data:
+
+            input_state = Statevector.from_label(in_qubits)
+            output_state = input_state.evolve(qc)
+            
+            fidelity = abs(np.vdot(expected, output_state.data)) ** 2
+            total += fidelity # for maximising fitness
+            #total += (1-fidelity) # for minimising fitness
+            count += 1
+            
+        
+        return total/count
         
             
-    def makefitness(self):
+    def makefitness(self, data: list[list[str], np.array]):
+        # self.inputqubits = inputqubits
         for qc in self.qiskitcircuits:
-            self.fitnesses.append(self.evaluatecircuit(qc))
+            self.fitnesses.append(self.evaluatecircuit(qc, data))
+            
             
         # automatically add fitness to the population after this?

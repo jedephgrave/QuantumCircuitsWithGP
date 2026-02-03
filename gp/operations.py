@@ -9,6 +9,26 @@ def selection(population: Population):
     
     sample = population.sample_population(TOURNAMENT_SIZE)
     
+    best_fitness = 0
+    best_circuit = None
+    
+    for index in range(TOURNAMENT_SIZE):
+        member_fitness = sample.fitnesses[index]
+        member_circuit = sample.member(index)
+        
+        if member_fitness > best_fitness:
+            best_fitness = member_fitness
+            best_circuit = member_circuit
+            
+    return best_circuit
+
+# for minimising fitness function - depends on it
+# LEGACY
+def selection_min(population: Population):
+    # select based on tournmanet size
+    
+    sample = population.sample_population(TOURNAMENT_SIZE)
+    
     best_fitness = math.inf
     best_circuit = None
     
