@@ -3,7 +3,7 @@ from .population import Population
 from circuit import Circuit
 from config import TOURNAMENT_SIZE, GATE_SET, MUTANT_INSERT_SIZE, MUTANT_SHRINK_SIZE
 import random, math
-from .initialisation import create_random_circuit
+from .initialisation import create_random_circuit, create_random_gate
 
 def selection(population: Population):
     # select based on tournmanet size
@@ -89,7 +89,7 @@ def insertion(parent_one: Circuit, parent_two: Circuit) -> list[Circuit]:
     
     return [child_one, child_two]
 
-def mutant_insertion(parent: Circuit) -> Circuit:
+def insert_mutation(parent: Circuit) -> Circuit:
     
     mutant_circuit = create_random_circuit(MUTANT_INSERT_SIZE['min'], MUTANT_INSERT_SIZE['max'])
     split_point = random.randint(0, parent.length - 2) # split point to add new
@@ -98,6 +98,18 @@ def mutant_insertion(parent: Circuit) -> Circuit:
     child = mutant_circuit.insert_between(left, right)
     
     return child
+
+def shrink_mutation(parent: Circuit) -> Circuit:
+    
+    mutant_gate = create_random_gate()
+    remove_size = random.randint(MUTANT_SHRINK_SIZE['min'], MUTANT_SHRINK_SIZE['max'])
+    
+    remove_point = random.randint(0, parent.length-remove_size)
+    
+    parent.swap(remove_point, mutant_gate)
+    parent.remove_gates(remove_point+1, remove_size-1)
+    
+    return parent
     
     
     

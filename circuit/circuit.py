@@ -65,6 +65,16 @@ class Circuit:
         
         self.circuit = left + right
         
+    def remove_gates(self, index: int, num_removals: int = 1):
+        
+        end = (index+num_removals) - 1
+        
+        if not(0 <= end< self.length):
+            raise ValueError(f"Range between 0 and {self.length} expected, removing from {index} to {end} is outside the range")
+        
+        for i in range(index, index + num_removals):
+            self.circuit.pop(i)
+            
 
     def __str__(self) -> str:
         circuit_array = []

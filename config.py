@@ -39,7 +39,7 @@ PROB_DICT = {'crossover' : 0.35,
              }
 
 # ensure to run this before gp begins run
-check_prob = sum(PROB_DICT.values()) == 1
+check_prob = (sum(PROB_DICT.values()) == 1)
     
            
 
@@ -58,7 +58,7 @@ IDEAL_RESULTS = {
 
 NUM_GENERATIONS = 40
 
-TOURNAMENT_SIZE = 5
+TOURNAMENT_SIZE = 4
 
 
 
