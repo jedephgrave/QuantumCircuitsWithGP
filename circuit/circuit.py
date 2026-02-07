@@ -29,6 +29,29 @@ class Circuit:
         
         return Circuit(combination, self.num_wires)
     
+    def split_three(self, cutoff_one: int, cutoff_two: int) -> tuple["Circuit"]:
+        
+        if not(1 <= cutoff_one < self.length - 1):
+            raise ValueError(f"First cutoff between 0 and {self.length - 1} expected, value of {cutoff_one} given.")
+        
+        if not(cutoff_one <= cutoff_two < self.length - 1):
+            raise ValueError(f"Second cutoff between {cutoff_one} and {self.length - 1} expected, value of {cutoff_two} given")
+
+        left = self.circuit[:cutoff_one:]
+        middle = self.circuit[cutoff_one:cutoff_two+1:]
+        right = self.circuit[cutoff_two+1::]
+        
+        return Circuit(left, self.num_wires), Circuit(middle, self.num_wires), Circuit(right, self.num_wires)
+    
+    def insert_between(self, left_circuit: "Circuit", right_circuit: "Circuit") -> "Circuit":
+        left = left_circuit.circuit
+        middle = self.circuit
+        right = right_circuit.circuit
+        
+        combination = left + middle + right
+        
+        return Circuit(combination, self.num_wires)
+    
     def swap(self, index: int, new_gate: Gate):
         # takes gate at defined index and swaps for given gate
         

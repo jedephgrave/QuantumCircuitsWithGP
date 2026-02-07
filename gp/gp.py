@@ -7,6 +7,7 @@ from .operations import selection, crossover, mutation
 from .population import Population
 from .data_process import get_data
 import random
+import numpy as np
 
 def evolution() -> Population:
     
@@ -59,6 +60,10 @@ def evolution() -> Population:
     
     print("\n------------------------------------------------------------\n")
     print("BEST FITNESSES: ", max(population.fitnesses))
+    print("\n------------------------------------------------------------\n")
+    
+    print("\n------------------------------------------------------------\n")
+    print("AVERAGE FITNESSES: ", np.mean(population.fitnesses))
     print("\n------------------------------------------------------------\n")
         
     return population

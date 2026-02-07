@@ -1,8 +1,9 @@
 # crossover (selection too) and mutation functions needed
 from .population import Population
 from circuit import Circuit
-from config import TOURNAMENT_SIZE, GATE_SET
+from config import TOURNAMENT_SIZE, GATE_SET, MUTANT_INSERT_SIZE, MUTANT_SHRINK_SIZE
 import random, math
+from .initialisation import create_random_circuit
 
 def selection(population: Population):
     # select based on tournmanet size
@@ -68,7 +69,36 @@ def mutation(parent: Circuit) -> Circuit:
     
     return parent
 
-
 # a generalised crossover - can be any given middle section from the circuit (cut at two points)
 def insertion(parent_one: Circuit, parent_two: Circuit) -> list[Circuit]:
-    pass
+    # takes chunk from each circuit 
+    # swaps chunks between them
+    # generalised crossover
+    
+    split_one_a = random.randint(1, parent_one.length - 2)
+    split_one_b = random.randint(split_one_a, parent_one.length - 2)
+    
+    split_two_a = random.randint(1, parent_two.length - 2)
+    split_two_b = random.randint(split_two_a, parent_two.length - 2)
+    
+    parent_one_left, parent_one_middle, parent_one_right = parent_one.split_three(split_one_a, split_one_b)
+    parent_two_left, parent_two_middle, parent_two_right = parent_two.split_three(split_two_a, split_two_b)
+    
+    child_one = parent_one_middle.insert_between(parent_two_left, parent_two_right)
+    child_two = parent_two_middle.insert_between(parent_one_left, parent_one_right)
+    
+    return [child_one, child_two]
+
+def mutant_insertion(parent: Circuit) -> Circuit:
+    
+    mutant_circuit = create_random_circuit(MUTANT_INSERT_SIZE['min'], MUTANT_INSERT_SIZE['max'])
+    split_point = random.randint(0, parent.length - 2) # split point to add new
+    
+    left, right = parent.split(split_point)
+    child = mutant_circuit.insert_between(left, right)
+    
+    return child
+    
+    
+    
+    
