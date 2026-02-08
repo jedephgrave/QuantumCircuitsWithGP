@@ -31,7 +31,7 @@ class Circuit:
     
     def split_three(self, cutoff_one: int, cutoff_two: int) -> tuple["Circuit"]:
         
-        if not(1 <= cutoff_one < self.length - 1):
+        if not(0 <= cutoff_one < self.length - 1):
             raise ValueError(f"First cutoff between 0 and {self.length - 1} expected, value of {cutoff_one} given.")
         
         if not(cutoff_one <= cutoff_two < self.length - 1):
@@ -72,8 +72,10 @@ class Circuit:
         if not(0 <= end< self.length):
             raise ValueError(f"Range between 0 and {self.length} expected, removing from {index} to {end} is outside the range")
         
-        for i in range(index, index + num_removals):
-            self.circuit.pop(i)
+        
+        for _ in range(index, index + num_removals):
+            self.circuit.pop(index)
+            self.length -= 1
             
 
     def __str__(self) -> str:

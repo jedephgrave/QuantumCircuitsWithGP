@@ -38,6 +38,14 @@ PROB_DICT = {'crossover' : 0.35,
              'shrink_mutation': 0.1
              }
 
+CUMULATIVE_PROB = dict()
+
+def build_cumulative_prob():
+    s = 0
+    for key in PROB_DICT:
+        s += PROB_DICT[key]
+        CUMULATIVE_PROB[key] = s
+
 # ensure to run this before gp begins run
 check_prob = (sum(PROB_DICT.values()) == 1)
     
@@ -56,7 +64,7 @@ IDEAL_RESULTS = {
 
 # gp variables
 
-NUM_GENERATIONS = 40
+NUM_GENERATIONS = 45
 
 TOURNAMENT_SIZE = 4
 

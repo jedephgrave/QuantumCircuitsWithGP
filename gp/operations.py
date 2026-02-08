@@ -75,10 +75,10 @@ def insertion(parent_one: Circuit, parent_two: Circuit) -> list[Circuit]:
     # swaps chunks between them
     # generalised crossover
     
-    split_one_a = random.randint(1, parent_one.length - 2)
+    split_one_a = random.randint(0, parent_one.length - 2)
     split_one_b = random.randint(split_one_a, parent_one.length - 2)
     
-    split_two_a = random.randint(1, parent_two.length - 2)
+    split_two_a = random.randint(0, parent_two.length - 2)
     split_two_b = random.randint(split_two_a, parent_two.length - 2)
     
     parent_one_left, parent_one_middle, parent_one_right = parent_one.split_three(split_one_a, split_one_b)
@@ -101,13 +101,14 @@ def insert_mutation(parent: Circuit) -> Circuit:
 
 def shrink_mutation(parent: Circuit) -> Circuit:
     
-    mutant_gate = create_random_gate()
-    remove_size = random.randint(MUTANT_SHRINK_SIZE['min'], MUTANT_SHRINK_SIZE['max'])
-    
-    remove_point = random.randint(0, parent.length-remove_size)
-    
-    parent.swap(remove_point, mutant_gate)
-    parent.remove_gates(remove_point+1, remove_size-1)
+    if parent.length > 2:
+        mutant_gate = create_random_gate()
+        remove_size = random.randint(MUTANT_SHRINK_SIZE['min'], MUTANT_SHRINK_SIZE['max'])
+        
+        remove_point = random.randint(0, parent.length-remove_size)
+        
+        parent.swap(remove_point, mutant_gate)
+        parent.remove_gates(remove_point+1, remove_size-1)
     
     return parent
     
