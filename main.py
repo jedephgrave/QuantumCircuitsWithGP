@@ -1,14 +1,12 @@
-from gp import initialisation
-from evaluation import CircuitFitness
-from gp import operations
-
-from circuit import Circuit, Gate
-
-from gp import gp, Population
+from gp import gp
+from config import check_prob
 
 def main():
-    p = gp.evolution()
-    print(p)
+    if check_prob: 
+        p = gp.evolution()
+        print(p)
+    else:
+        print("Check operation probabilities sum to 1")
     
 
 if __name__ == "__main__":

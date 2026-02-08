@@ -11,6 +11,9 @@ class QiskitBuilder:
             "H": self.hadamard,
             "CN": self.cnot,
             "X": self.paulix,
+            "SWAP": self.swapgate,
+            "S": self.sgate,
+            "SN": self.cs,
         }
         
     # class methods:
@@ -33,6 +36,15 @@ class QiskitBuilder:
 
     def paulix(self, wires: list[int]):
         self.qc.x(wires[0])
+        
+    def swapgate(self, wires: list[int]):
+        self.qc.swap(wires[0], wires[1])
+        
+    def sgate(self, wires: list[int]):
+        self.qc.s(wires[0])
+        
+    def cs(self, wires: list[int]):
+        self.qc.cs(wires[0], wires[1])
 
 # call fitness on whole population - 
 # take in a given circuit

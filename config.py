@@ -1,20 +1,55 @@
 from circuit import Gate 
 
 GATE_SET = [
-    Gate('H', 1, 0),
-    Gate('CN', 2, 0),
+    Gate('H', 1, 0),   
+    Gate('SWAP', 2, 0),
+    Gate('SN', 2, 0),
 ]
 
 # dont use this - just to list extra gates not currently being used
 SPARE_GATE_SET = [
     Gate('X', 1, 0),
+    Gate('CN', 2, 0),
+    Gate('S', 1, 0),
 ]
 
 NUM_WIRES = 2
 
 # gp hyperparameters go here 
-POPULATION_SIZE = 20
-INITIAL_SOLUTION_SIZE = 3
+POPULATION_SIZE = 100
+
+INITIAL_SIZE = {'max': 4,
+                'min': 3
+                }
+
+# maybe add a max insertion size for the chunks?
+
+MUTANT_INSERT_SIZE = {'max': 3,
+                      'min': 2
+                      }
+MUTANT_SHRINK_SIZE = {'max': 2,
+                      'min': 1
+                      }
+
+PROB_DICT = {'crossover' : 0.35,
+             'insertion': 0.3,
+             'mutation': 0.15,
+             'insert_mutation': 0.1,
+             'shrink_mutation': 0.1
+             }
+
+CUMULATIVE_PROB = dict()
+
+def build_cumulative_prob():
+    s = 0
+    for key in PROB_DICT:
+        s += PROB_DICT[key]
+        CUMULATIVE_PROB[key] = s
+
+# ensure to run this before gp begins run
+check_prob = (sum(PROB_DICT.values()) == 1)
+    
+           
 
 # evaluation variables go here (ideal circuit outputs, times evaluated)
 
@@ -29,9 +64,9 @@ IDEAL_RESULTS = {
 
 # gp variables
 
-NUM_GENERATIONS = 10
+NUM_GENERATIONS = 45
 
-TOURNAMENT_SIZE = 2 
+TOURNAMENT_SIZE = 4
 
 
 

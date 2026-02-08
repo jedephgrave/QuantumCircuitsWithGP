@@ -1,4 +1,4 @@
-from config import POPULATION_SIZE, INITIAL_SOLUTION_SIZE, GATE_SET, NUM_WIRES
+from config import POPULATION_SIZE, GATE_SET, NUM_WIRES, INITIAL_SIZE
 from circuit import Circuit, Gate
 from .population import Population
 import random
@@ -19,15 +19,16 @@ def create_random_gate():
     
     return gate
     
-def create_random_circuit() -> Circuit:
+def create_random_circuit(min_size: int = INITIAL_SIZE['min'], max_size: int = INITIAL_SIZE['max']) -> Circuit:
     # call create random gates and add to circuit
-    num_gates = random.randint(2, INITIAL_SOLUTION_SIZE)
+    num_gates = random.randint(min_size, max_size)
     c = Circuit([], NUM_WIRES) # initiliase circuit as empty
     
     for _ in range(num_gates):
         c.add_gate(create_random_gate())
         
     return c
+
 
     
     
