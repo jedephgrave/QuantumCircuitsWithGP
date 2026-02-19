@@ -13,7 +13,8 @@ def get_data() -> list[list[str], np.array]:
     # data file location
     current = Path(__file__).resolve()
     root = current.parent.parent
-    path = root / 'test_data.csv'
+    path = root / 'data/test_data.csv'
+    
     
     
     df = pd.read_csv(path)

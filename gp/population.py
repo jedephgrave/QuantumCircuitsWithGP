@@ -67,6 +67,19 @@ class Population:
         
         return sample_pop
     
+    def get_best(self, num_best: int) -> list[Circuit]:
+        if num_best > self.size:
+            return ValueError(f"Number between 1 and {self.size} expected, number higher than {self.size} given")
+
+        zipped = list(zip(self.members, self.fitnesses))
+        sorted_circuits = sorted(zipped, key = lambda x: x[1], reverse=True)
+        
+        c, f = list(zip(*sorted_circuits))
+        
+        best_n = c[:num_best]
+        
+        return best_n
+    
     def overwrite_from(self, new_population):
         self.__dict__.clear()
         self.__dict__.update(new_population.__dict__)

@@ -1,4 +1,5 @@
 from .gate import Gate
+import copy
 
 class Circuit:
     
@@ -76,6 +77,9 @@ class Circuit:
         for _ in range(index, index + num_removals):
             self.circuit.pop(index)
             self.length -= 1
+            
+    def copy(self) -> "Circuit":
+        return copy.deepcopy(self)
             
 
     def __str__(self) -> str:

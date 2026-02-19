@@ -62,12 +62,14 @@ def crossover(parent_one: Circuit, parent_two: Circuit) -> list[Circuit]:
 def mutation(parent: Circuit) -> Circuit:
     # mutate one gate in the circuit to another random one 
     
+    child = parent.copy()
+    
     new_gate = random.choice(GATE_SET)
-    position = random.randint(0, parent.length - 1)
+    position = random.randint(0, child.length - 1)
     
-    parent.swap(position, new_gate)
+    child.swap(position, new_gate)
     
-    return parent
+    return child
 
 # a generalised crossover - can be any given middle section from the circuit (cut at two points)
 def insertion(parent_one: Circuit, parent_two: Circuit) -> list[Circuit]:

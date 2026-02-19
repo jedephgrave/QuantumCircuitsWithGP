@@ -8,5 +8,8 @@
 # Functionality testing
 test_features.py
 
+# Data files
+data/*
+
 # Other
 notes.txt

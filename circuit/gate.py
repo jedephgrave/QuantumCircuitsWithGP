@@ -29,6 +29,9 @@ class Gate:
             
         self._param = param
         
+    def copy(self) -> "Gate":
+        return Gate(self.name, self.arity, self.params)
+        
     def __str__(self) -> str:
         return f"({self.name}, {self.wires}, {self.param})"
         

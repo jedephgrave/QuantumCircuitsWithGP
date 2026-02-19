@@ -1,5 +1,6 @@
 from qiskit import QuantumCircuit
 from circuit import Circuit, Gate
+import numpy as np
 
 
 class QiskitBuilder:
@@ -13,7 +14,8 @@ class QiskitBuilder:
             "X": self.paulix,
             "SWAP": self.swapgate,
             "S": self.sgate,
-            "SN": self.cs,
+            "CS": self.cs,
+            "CP": self.cp,
         }
         
     # class methods:
@@ -45,6 +47,9 @@ class QiskitBuilder:
         
     def cs(self, wires: list[int]):
         self.qc.cs(wires[0], wires[1])
+        
+    def cp(self, wires: list[int]):
+        self.qc.cp(np.pi/4, wires[0], wires[1])
 
 # call fitness on whole population - 
 # take in a given circuit
