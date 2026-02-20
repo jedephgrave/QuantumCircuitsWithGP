@@ -11,5 +11,8 @@ test_features.py
 # Data files
 data/*
 
+# Plot files
+plot/*
+
 # Other
 notes.txt

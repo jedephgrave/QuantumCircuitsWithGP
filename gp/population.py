@@ -80,6 +80,13 @@ class Population:
         
         return best_n
     
+    def get_lengths(self) -> list[int]:
+        circuit_lengths = []
+        for member in self.members:
+            circuit_lengths.append(member.length)
+        
+        return circuit_lengths
+    
     def overwrite_from(self, new_population):
         self.__dict__.clear()
         self.__dict__.update(new_population.__dict__)

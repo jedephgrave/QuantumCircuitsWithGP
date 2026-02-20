@@ -12,7 +12,7 @@ import numpy as np
 def evolution() -> Population:
     
     with open(r'data/fitness_output.csv', 'w') as f:
-        titles = ['gen', 'average', 'best', 'numgood']
+        titles = ['gen', 'average', 'best', 'numgood', 'avg_size']
         writer = csv.writer(f)
         writer.writerow(titles)
     
@@ -40,6 +40,7 @@ def evolution() -> Population:
         
         best_fitness_sofar = max(population.fitnesses)
         mean_fitness_sofar = np.mean(population.fitnesses)
+        average_circuit_length = np.mean(population.get_lengths())
         
         
         valid_circuit_count = 0
@@ -76,6 +77,12 @@ def evolution() -> Population:
                 
                 next_population.add_member(child)
                 
+            elif r < CUMULATIVE_PROB['wire_mutation']:
+                parent = selection(population)
+                child = wire_mutation(parent)
+                
+                next_population.add_member(child)
+                
             elif r < CUMULATIVE_PROB['insert_mutation']:
                 parent = selection(population)
                 child = insert_mutation(parent)
@@ -104,7 +111,7 @@ def evolution() -> Population:
         
         # write data to csv file 
         with open(r'data/fitness_output.csv', 'a') as f:
-            row = [num_gen+1, mean_fitness_sofar, best_fitness_sofar, valid_circuit_count]
+            row = [num_gen+1, mean_fitness_sofar, best_fitness_sofar, valid_circuit_count, average_circuit_length]
             writer = csv.writer(f)
             writer.writerow(row)
     

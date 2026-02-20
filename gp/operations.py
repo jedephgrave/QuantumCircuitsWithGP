@@ -71,6 +71,20 @@ def mutation(parent: Circuit) -> Circuit:
     
     return child
 
+def wire_mutation(parent: Circuit) -> Circuit:
+    
+    # copy child and generate wire values
+    child = parent.copy()
+    num_wires = child.num_wires
+    wire_values = list(range(0, num_wires))
+      
+    # get random gate and change wires to random
+    position = random.randint(0, child.length - 1)
+    gate = child.circuit[position]
+    gate.wires = random.sample(wire_values, gate.arity)
+
+    return child
+
 # a generalised crossover - can be any given middle section from the circuit (cut at two points)
 def insertion(parent_one: Circuit, parent_two: Circuit) -> list[Circuit]:
     # takes chunk from each circuit 

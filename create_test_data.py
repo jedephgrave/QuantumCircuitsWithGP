@@ -4,7 +4,7 @@ import numpy as np
 from qiskit import QuantumCircuit
 from qiskit.quantum_info import Statevector
 
-#important = ['000', '001', '010', '011', '100', '101', '110', '111', '+++', '+00', '0+0', '00+']
+important = ['000', '001', '010', '011', '100', '101', '110', '111', '+++', '+00', '0+0', '00+']
 
 
 # ----------------------------------
@@ -84,11 +84,11 @@ def generate_qft_dataset(
     n_inputs=10,
     output_csv="qft_dataset.csv"
 ):
-    qc = build_qft_2()
+    qc = build_qft_3()
 
     inputs = generate_random_inputs(n_qubits, n_inputs)
     
-    #inputs += important
+    inputs += important
 
     rows = []
     for label in inputs:
@@ -116,7 +116,7 @@ def generate_qft_dataset(
 # ----------------------------------
 if __name__ == "__main__":
     generate_qft_dataset(
-        n_qubits=2,      # ← change this freely
-        n_inputs=10,     # ← change this freely
+        n_qubits=3,      # ← change this freely
+        n_inputs=8,     # ← change this freely
         output_csv="data/test_data.csv"
     )

@@ -29,9 +29,7 @@ def create_random_circuit(min_size: int = INITIAL_SIZE['min'], max_size: int = I
         
     return c
 
-
-    
-    
+  
 def init_population() -> Population:
     # call create random circuits and add them to population
     p = Population([])

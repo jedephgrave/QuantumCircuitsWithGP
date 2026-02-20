@@ -16,15 +16,15 @@ SPARE_GATE_SET = [
     Gate('SWAP', 2, 0),
 ]
 
-NUM_WIRES = 2
+NUM_WIRES = 3
 
 # gp hyperparameters go here 
 POPULATION_SIZE = 300
 
 ELITE_COUNT = 3
 
-INITIAL_SIZE = {'max': 4,
-                'min': 3
+INITIAL_SIZE = {'max': 6,
+                'min': 5
                 }
 
 # maybe add a max insertion size for the chunks?
@@ -38,7 +38,8 @@ MUTANT_SHRINK_SIZE = {'max': 2,
 
 PROB_DICT = {'crossover' : 0.50,
              'insertion': 0.0,
-             'mutation': 0.50,
+             'mutation': 0.1,
+             'wire_mutation': 0.4,
              'insert_mutation': 0.0,
              'shrink_mutation': 0.0
              }
@@ -57,7 +58,7 @@ check_prob = (sum(PROB_DICT.values()) == 1)
     
 # gp variables
 
-NUM_GENERATIONS = 200
+NUM_GENERATIONS = 150
 
 TOURNAMENT_SIZE = 6
 
